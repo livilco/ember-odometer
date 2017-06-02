@@ -8,9 +8,11 @@ module.exports = {
     let target = (parentAddon || app);
     target.options = target.options || {};
 
+    let bowerDirectory = target.bowerDirectory || target.parent.bowerDirectory;
+
     target.import({
-      development: target.bowerDirectory + '/odometer/odometer.js',
-      production: target.bowerDirectory + '/odometer/odometer.min.js'
+      development: bowerDirectory + '/odometer/odometer.js',
+      production: bowerDirectory + '/odometer/odometer.min.js'
     });
 
     let theme = 'default';
@@ -19,7 +21,7 @@ module.exports = {
      theme = target.options.odometer.theme;
     }
 
-    target.import(target.bowerDirectory + '/odometer/themes/odometer-theme-' + theme + '.css');
+    target.import(bowerDirectory + '/odometer/themes/odometer-theme-' + theme + '.css');
 
     return this._super.included.apply(this, arguments);
   }
